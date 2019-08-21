@@ -1,0 +1,48 @@
+{
+    "mappings": {
+        "properties": {
+            "date-time": {
+                "properties": {
+                    "end": {
+                        "type": "date"
+                    },
+                    "start": {
+                        "type": "date"
+                    }
+                }
+            },
+            "location": {
+                "properties": {
+                    "adress": {
+                        "properties": {
+                            "number": {
+                                "type": "short"
+                            },
+                            "street": {
+                                "type": "text"
+                            }
+                        }
+                    },
+                    "city": {
+                        "type": "keyword"
+                    },
+                    "country": {
+                        "type": "keyword"
+                    },
+                    "district": {
+                        "type": "keyword"
+                    },
+                    "geo": {
+                        "type": "geo_point"
+                    },
+                    "state": {
+                        "type": "keyword"
+                    }
+                }
+            },
+            "name": {
+                "type": "text"
+            }
+        }
+    }
+}
