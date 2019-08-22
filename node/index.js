@@ -1,3 +1,3 @@
-const eventbrite = require("./mambas/eventbrite-mamba");
+const eventbrite = require("./mambas/eventbrite/eventbrite")
 
 eventbrite.Init();

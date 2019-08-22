@@ -1,8 +1,7 @@
 const fs = require("fs");
 const request = require("request");
 
-const token = fs.readFileSync("secret");
-console.log(token);
+const token = fs.readFileSync("./mambas/eventbrite/secret");
 
 var exports = module.exports = {}
 
