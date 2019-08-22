@@ -22,6 +22,7 @@
   },
   "homepage": "https://github.com/trivago-geo-events-db/mamba#readme",
   "dependencies": {
+    "node-schedule": "^1.3.2",
     "request": "^2.88.0"
   }
 }

@@ -1,3 +1,4 @@
-const eventbrite = require("./mambas/eventbrite/eventbrite")
+const scheduler = require("./src/Scheduler");
+const eventbrite = require("./src/mambas/eventbrite/eventbrite");
 
-eventbrite.Init();
+scheduler.Add(eventbrite);
