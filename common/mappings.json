@@ -1,7 +1,7 @@
 {
     "mappings": {
         "properties": {
-            "date-time": {
+            "datetime": {
                 "properties": {
                     "end": {
                         "type": "date"
@@ -13,7 +13,7 @@
             },
             "location": {
                 "properties": {
-                    "adress": {
+                    "address": {
                         "properties": {
                             "number": {
                                 "type": "short"

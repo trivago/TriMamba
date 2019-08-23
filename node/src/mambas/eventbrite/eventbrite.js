@@ -1,14 +1,18 @@
-const fs = require("fs");
 const request = require("request");
 const elasticWriter = require("../../ElasticWriter");
 
-const token = fs.readFileSync("./src/mambas/eventbrite/secret");
+const token = process.env.TOKEN_EVENTBRITE;
 const uri = "https://www.eventbriteapi.com/v3/"
+
+if (token == undefined) {
+    throw new Error("env variable TOKEN_EVENTBRITE is undefined");
+}
 
 module.exports.Run = async () => {
     await searchEventsByAdress("Berlin").then((data) => {
         data["events"].forEach(event => {
-            parseToElasticData(event);
+            let parsedData = parseToElasticData(event);
+            elasticWriter.write(parsedData).catch();
         });
     });
 }
@@ -35,7 +39,7 @@ function searchEventsByAdress(adress, radius) {
         }
 
         request(encodeURI(uriRequest), {
-            'auth': {
+            auth: {
                 bearer: token
             }
         }, (err, res, body) => {
@@ -58,12 +62,11 @@ function searchEventsByAdress(adress, radius) {
     })
 }
 
-function getVenueDataFromEvent(event) {
-    return event["venue"];
-}
-
+/** Parses an Eventbrite event to DB structure
+ * @param {*} event Single event from Eventbrite
+ * @returns Parsed JS object for Elastic DB with event data
+ */
 function parseToElasticData(event) {
-    new Promise
     let elasticData = new elasticWriter.elasticData();
 
     elasticData.name = event["name"]["text"];
@@ -73,16 +76,20 @@ function parseToElasticData(event) {
     }
 
     let venue = event["venue"];
-    let adress = venue["address"];
+    let address = venue["address"];
 
     elasticData.location = {
-        adress: adress["address_1"],
-        city: adress["city"],
-        country: adress["country"],
-        state: adress["region"],
-        location: {
-            lat: adress["latitude"],
-            lon: adress["longitude"]
+        address: {
+            street: address["address_1"],
+        },
+        city: address["city"],
+        country: address["country"],
+        state: address["region"],
+        geo: {
+            lat: address["latitude"],
+            lon: address["longitude"]
         }
     }
+
+    return elasticData;
 }
