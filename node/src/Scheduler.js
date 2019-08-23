@@ -10,6 +10,11 @@ module.exports.Add = (crawler) => {
         throw error;
     }
 
+    if (process.env.DEBUG = true) {
+        console.warn("Debug is enabled. Scheduler disabled and only running crawlers once.");
+        return;
+    }
+
     scheduler.scheduleJob(rule, () => {
         console.log("Running job:", crawler);
         crawler.Run();
