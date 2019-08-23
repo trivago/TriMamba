@@ -17,5 +17,11 @@ This project is part of the [Trivago Tech Camp 2019](https://techcamp.trivago.co
 
 - Install using `npm install`
 - eventbride-mamba
-  - place `secret` file in `/node/mambas/eventbrite/secret`
-- run using `npm start`
+  - local
+    - set environment variables for
+      - elastic db url: `ELASTIC_URI`
+      - eventbrite secret: `TOKEN_EVENTBRITE`
+    - run using `npm start`
+  - docker
+    - build docker file
+    - run with `--env-file` (important for string formatting)
