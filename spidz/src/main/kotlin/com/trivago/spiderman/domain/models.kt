@@ -4,8 +4,9 @@ import com.google.gson.annotations.SerializedName
 
 class DomainEvent {
     var name = ""
-    @SerializedName("date-time")
-    lateinit var dateTime: DomainDateTime
+
+    lateinit var datetime: DomainDateTime
+
     @SerializedName("location")
     lateinit var location: DomainLocation
 }
@@ -24,7 +25,7 @@ class DomainLocation {
     var district = ""
     var state = ""
 
-    @SerializedName("location")
+    @SerializedName("geo")
     lateinit var geo: DomainGeo
 }
 
