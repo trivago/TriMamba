@@ -9,10 +9,41 @@ if (token == undefined) {
 }
 
 module.exports.Run = async () => {
-    await searchEventsByAdress("Berlin").then((data) => {
-        data["events"].forEach(event => {
-            let parsedData = parseToElasticData(event);
-            elasticWriter.write(parsedData).catch();
+    searchAndSave([
+        "Berlin",
+        "Hamburg",
+        "München",
+        "Köln",
+        "Frankfurt am Main",
+        "Stuttgart",
+        "Düsseldorf",
+        "Dortmund",
+        "Essen",
+        "Leipzig",
+        "Bremen",
+        "Dresden",
+        "Hannover",
+        "Nürnberg",
+        "Duisburg",
+        "Bochum",
+        "Wuppertal",
+        "Bielefeld",
+        "Bonn",
+        "Münster",
+
+        "Braunschweig",
+        "Kleve"
+    ]);
+}
+
+function searchAndSave(cities) {
+
+    cities.forEach(city => {
+        searchEventsByAdress(city).then((data) => {
+            data["events"].forEach(event => {
+                let parsedData = parseToElasticData(event);
+                elasticWriter.write(parsedData).catch();
+            });
         });
     });
 }
@@ -31,7 +62,7 @@ function searchEventsByAdress(adress, radius) {
             uri +
             "events/search?" +
             "expand=venue" + // Add extensive venue data
-            "&location.address=" + adress;
+            "&location.address=" + adress + ", Deutschland";
 
         let radiusRegExp = new RegExp("\\d+(mi|km)");
         if (radius != null && radiusRegExp.test(radius)) {
@@ -43,21 +74,16 @@ function searchEventsByAdress(adress, radius) {
                 bearer: token
             }
         }, (err, res, body) => {
-            if (err != null) {
-                console.error(err);
-                reject(err);
-            }
-
-            if (res.statusCode != 200) {
-                console.error(res);
-                reject(res);
+            if (err != null || res.statusCode.toString().startsWith("2") == false) {
+                console.error(JSON.stringify(res, null, 2));
+                return reject(res);
             }
 
             console.log("Requested events", res.statusCode, res.statusMessage);
 
             let json = JSON.parse(body);
 
-            resolve(json);
+            return resolve(json);
         });
     })
 }
@@ -79,9 +105,7 @@ function parseToElasticData(event) {
     let address = venue["address"];
 
     elasticData.location = {
-        address: {
-            street: address["address_1"],
-        },
+        address: address["address_1"],
         city: address["city"],
         country: address["country"],
         state: address["region"],

@@ -41,18 +41,13 @@ exports.write = function (data) {
             body: data,
             json: true
         }, (err, res, body) => {
-            if (err != null) {
-                console.error(err);
-                reject(err);
-            }
-
-            if (res.statusCode.toString().startsWith("2") == false) {
-                console.error(res);
-                reject(res);
+            if (err != null || res.statusCode.toString().startsWith("2") == false) {
+                console.error(JSON.stringify(res, null, 2));
+                return reject(res);
             }
 
             console.log("Sent events to db", res.statusCode, res.statusMessage, data["name"]);
-            resolve();
+            return resolve();
         });
 
     });
