@@ -6,6 +6,8 @@ if (elasticURI == undefined) {
     throw new Error("env variable ELASTIC_URI is undefined");
 }
 
+/** Class to save elasticsearch db data in correct mapping
+ */
 exports.elasticData = function () {
     this.name = "";
     this.datetime = {
@@ -13,7 +15,7 @@ exports.elasticData = function () {
         end: null
     };
     this.location = {
-        adress: {
+        address: {
             street: "",
             number: ""
         },
@@ -28,6 +30,9 @@ exports.elasticData = function () {
     };
 }
 
+/** Send the data to the elasticsearch database
+ * @param data {*} data to be send to the database
+ */
 exports.write = function (data) {
 
     // TODO: Check if data is already present in DB
@@ -41,18 +46,13 @@ exports.write = function (data) {
             body: data,
             json: true
         }, (err, res, body) => {
-            if (err != null) {
-                console.error(err);
-                reject(err);
-            }
-
-            if (res.statusCode.toString().startsWith("2") == false) {
-                console.error(res);
-                reject(res);
+            if (err != null || res.statusCode.toString().startsWith("2") == false) {
+                console.error(JSON.stringify(res, null, 2));
+                return reject(res);
             }
 
             console.log("Sent events to db", res.statusCode, res.statusMessage, data["name"]);
-            resolve();
+            return resolve();
         });
 
     });
