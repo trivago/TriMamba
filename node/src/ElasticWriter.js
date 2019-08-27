@@ -6,6 +6,8 @@ if (elasticURI == undefined) {
     throw new Error("env variable ELASTIC_URI is undefined");
 }
 
+/** Class to save elasticsearch db data in correct mapping
+ */
 exports.elasticData = function () {
     this.name = "";
     this.datetime = {
@@ -13,7 +15,7 @@ exports.elasticData = function () {
         end: null
     };
     this.location = {
-        adress: {
+        address: {
             street: "",
             number: ""
         },
@@ -28,6 +30,9 @@ exports.elasticData = function () {
     };
 }
 
+/** Send the data to the elasticsearch database
+ * @param data {*} data to be send to the database
+ */
 exports.write = function (data) {
 
     // TODO: Check if data is already present in DB

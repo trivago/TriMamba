@@ -8,7 +8,9 @@ if (token == undefined) {
     throw new Error("env variable TOKEN_EVENTBRITE is undefined");
 }
 
-module.exports.Run = async () => {
+/** Run the crawler
+ */
+exports.Run = async () => {
     searchAndSave([
         "Berlin",
         "Hamburg",
@@ -36,8 +38,10 @@ module.exports.Run = async () => {
     ]);
 }
 
+/** Searches for events in the given cities and saves them to the database#
+ * @param {*} cities Array of strings with city names to check out
+ */
 function searchAndSave(cities) {
-
     cities.forEach(city => {
         searchEventsByAdress(city).then((data) => {
             data["events"].forEach(event => {
