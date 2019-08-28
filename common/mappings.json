@@ -1,7 +1,7 @@
 {
     "mappings": {
         "properties": {
-            "date-time": {
+            "datetime": {
                 "properties": {
                     "end": {
                         "type": "date"
@@ -13,35 +13,31 @@
             },
             "location": {
                 "properties": {
-                    "adress": {
-                        "properties": {
-                            "number": {
-                                "type": "short"
-                            },
-                            "street": {
-                                "type": "text"
-                            }
-                        }
+                    "address": {
+                        "type": "text"
                     },
                     "city": {
-                        "type": "keyword"
+                        "type": "text"
                     },
                     "country": {
                         "type": "keyword"
                     },
                     "district": {
-                        "type": "keyword"
+                        "type": "text"
                     },
                     "geo": {
                         "type": "geo_point"
                     },
                     "state": {
-                        "type": "keyword"
+                        "type": "text"
                     }
                 }
             },
             "name": {
                 "type": "text"
+            },
+            "info": {
+                "type": "object"
             }
         }
     }

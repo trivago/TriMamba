@@ -1,6 +1,6 @@
 {
     "name": "Trivago Tech Camp 2019",
-    "date-time": {
+    "datetime": {
         "start": "2019-08-19T09:00:00Z",
         "end": "2019-08-30T17:00:00Z"
     },
@@ -13,7 +13,7 @@
         "country": "DE",
         "district": "Düsseldorf-Hafen",
         "state": "Nordrhein-Westfalen",
-        "location": {
+        "geo": {
             "lat": 51.2140934,
             "lon": 6.7406008
         }
