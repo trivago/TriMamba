@@ -39,7 +39,7 @@ exports.write = function (data) {
 
     return new Promise((resolve, reject) => {
 
-        request.post(encodeURI(elasticURI + "/event-brite/_doc"), {
+        request.post(encodeURI(elasticURI + "/_doc"), {
             headers: {
                 "Content-Type": "application/json"
             },
