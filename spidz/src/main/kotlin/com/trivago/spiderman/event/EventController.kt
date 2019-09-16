@@ -43,7 +43,11 @@ class EventController {
     }
 
     private fun getAddressData(address: String): JsonObject {
-        var url = "https://api.tomtom.com/search/2/search/${URLEncoder.encode(address, "UTF-8")}.json?limit=1&countrySet=DE&idxSet=POI&key=c6U1YkgaBfTTBZSS16q5DmH5HfxUVPgy";
+        var url = "https://api.tomtom.com/search/2/search/" +
+                "${URLEncoder.encode(address, "UTF-8")}.json" +
+                "?limit=1&countrySet=DE&idxSet=POI&key=" +
+                System.getenv("TOMTOM_KEY");
+
         var response = Unirest.get(url)
                 .header("Content-Type", "application/json")
                 .header("cache-control", "no-cache")
