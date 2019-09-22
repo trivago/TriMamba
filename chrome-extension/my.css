@@ -1,0 +1,6 @@
+main {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: left;
+    align-items: left;
+}
