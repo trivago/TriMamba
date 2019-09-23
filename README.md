@@ -52,7 +52,7 @@ Before pushing data to the database, make sure to [create an index](https://www.
 
 ### Chrome extension
 
-The extension was running on a pivate development environment. In order to use it, setup elasticsearch as described above and add event data with one of the crawlers or manually.
+The extension was running on a pivate development environment. In order to use it, setup elasticsearch as described above and add event data with one of the crawlers or manually. Also be sure to replace the server URL in `contentScript.js`.
 
 The current extension is a very early prototype. To avoid [Chrome's cross-origin blocking](https://www.chromium.org/Home/chromium-security/extension-content-script-fetches) you need to start Chrome/Chromium with these command line arguments: `--disable-web-security --user-data-dir`
 
