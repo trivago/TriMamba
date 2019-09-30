@@ -32,7 +32,7 @@ TriMamba was a short project in the scope of the 2019th [TechCamp](https://techc
 
 ## Usage
 
-### Requirenments
+### Requirements
 
 TriMamba uses the [Elastick Stack](https://www.elastic.co/products/) to store and visualize data. Both [elasticsearch](https://www.elastic.co/products/elasticsearch) and [Kibana](https://www.elastic.co/products/kibana) need to be setup in advance. For our purposes we dockerized both and ran them linked besides the crawlers.
 
