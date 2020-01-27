@@ -40,6 +40,8 @@ Before pushing data to the database, make sure to [create an index](https://www.
 
 ### eventbrite-mamba
 
+> ***NOTE:*** Unfortunately on December 12th 2019 the Eventbrite search API has been discontinued, making eventbrite-mamba not functional anymore :( To learn more, check the [Eventbrite API changelog](https://www.eventbrite.com/platform/docs/changelog). Code and Readme will be kept for archival purposes.
+
 - Install using `npm install`
   - Create a .env file in the node application's root directory and set the environment variables for
     - `ELASTIC_URI`: elasticsearch database url + index name (`https://example.com/events`)
